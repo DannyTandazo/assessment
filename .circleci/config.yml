@@ -6,8 +6,6 @@ jobs:
     working_directory: ~/assessment
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run:
           name: Login to gcr.io
           command: cat src/main/resources/assesment-devops-3fa87521cee3.json | docker login -u _json_key --password-stdin https://gcr.io/assesment-devops
