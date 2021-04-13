@@ -59,7 +59,7 @@
 				<version>${jib.maven.plugin.version}</version>
 				<configuration>
 					<to>
-						<image>dtandazo/${project.artifactId}:${project.version}</image>
+						<image>gcr.io/testing-dtandazo/${project.artifactId}:${project.version}</image>
 					</to>
 				</configuration>
 			</plugin>
