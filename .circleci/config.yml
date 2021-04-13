@@ -16,6 +16,7 @@ jobs:
       - image: circleci/openjdk:11.0.1-jdk
     working_directory: ~/assessment
     steps:
+      - checkout
       - run: mvn test
 
 workflows:
