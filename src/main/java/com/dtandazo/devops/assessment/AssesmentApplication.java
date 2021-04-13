@@ -1,4 +1,4 @@
-package com.dtandazo.devops.assesment;
+package com.dtandazo.devops.assessment;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
