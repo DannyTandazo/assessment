@@ -24,7 +24,7 @@ public class TokenServiceImpl implements TokenService {
 
         String jwtToken = Jwts.builder()
             .setSubject(username)
-            .setExpiration(new Date(System.currentTimeMillis() + 600000))
+            .setExpiration(new Date(System.currentTimeMillis() + 300000))
             .signWith(SignatureAlgorithm.HS512, secretKey.getBytes(Charset.defaultCharset()))
             .compact();
 
