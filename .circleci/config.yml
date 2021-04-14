@@ -11,10 +11,6 @@ jobs:
           command: cat src/main/resources/assesment-devops-3fa87521cee3.json | docker login -u _json_key --password-stdin https://gcr.io/assesment-devops
       - run: mvn clean package -DskipTests
       - run: mvn compile jib:build -Dimage=gcr.io/assesment-devops/assesment:$CIRCLE_SHA1
-      - run: 
-          name: echo CircleSha
-          command: |
-            echo ${CIRCLE_SHA1}
   test:
     docker:
       - image: circleci/openjdk:11.0.1-jdk
@@ -44,8 +40,7 @@ jobs:
       - run: 
           name: Modify current Version Docker Image
           command: |
-            #echo ${CIRCLE_SHA1}
-            #sed -i "s/18/${CIRCLE_SHA1}/g" kubernetes/2-deployment.yaml
+            sed -i "s/18/${CIRCLE_SHA1}/g" kubernetes/2-deployment.yaml
       - run: 
           name: Deploy to Kubernetes
           command: |
