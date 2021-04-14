@@ -1,2 +1,2 @@
-project_id = "assesment-devops"
+project_id = "assesment-dtandazo"
 region     = "us-central1"

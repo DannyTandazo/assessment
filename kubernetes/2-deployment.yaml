@@ -16,7 +16,7 @@ spec:
       containers:
         - name: cxp
           imagePullPolicy: Always
-          image: gcr.io/assesment-devops/assesment:18
+          image: gcr.io/assesment-dtandazo/assesment:18
           ports:
             - containerPort: 8080
           readinessProbe:
