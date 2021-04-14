@@ -17,9 +17,17 @@ jobs:
     working_directory: ~/assessment
     steps:
       - checkout
-      - run: mvn test
+      - run:
+          name: Save test results
+          command: | 
+            mvn test
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit/ \;
+          when: always
       - store_test_results:
           path: target/surefire-reports
+      - store_artifacts:
+          path: ~/test-results/junit
   
   deploy:
     docker:
@@ -52,10 +60,10 @@ workflows:
   build_test_deploy:
     jobs:
       - test
-      - build:
-          requires:
-            - test
-      - deploy:
-          requires:
-            - test
-            - build
+      #- build:
+      #    requires:
+      #      - test
+      #- deploy:
+      #    requires:
+      #      - test
+      #     - build
