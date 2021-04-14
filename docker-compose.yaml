@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   assessment:
-    image: dtandazo/assessment:1.0.0-SNAPSHOT
+    image: gcr.io/assessment-devops/assessment:1.0.0-SNAPSHOT
     ports:
       - "8080:8080"
     expose:

@@ -16,7 +16,11 @@
 	<properties>
 		<java.version>11</java.version>
 		<lombok.version>1.18.18</lombok.version>
+		<jjwt.version>0.9.1</jjwt.version>
+		<springdoc.openapi.version>1.5.2</springdoc.openapi.version>
 		<jib.maven.plugin.version>2.7.1</jib.maven.plugin.version>
+		<jaxb.api.version>2.3.0</jaxb.api.version>
+		<swager.annotations.version>1.6.0</swager.annotations.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -35,6 +39,11 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
@@ -45,6 +54,29 @@
 			<version>${lombok.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>${jjwt.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>${jaxb.api.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>${springdoc.openapi.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>${swager.annotations.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -59,7 +91,7 @@
 				<version>${jib.maven.plugin.version}</version>
 				<configuration>
 					<to>
-						<image>gcr.io/testing-dtandazo/${project.artifactId}:${project.version}</image>
+						<image>gcr.io/assessment-devops/${project.artifactId}:${project.version}</image>
 					</to>
 				</configuration>
 			</plugin>
