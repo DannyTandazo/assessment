@@ -49,17 +49,18 @@ jobs:
       - run: 
           name: Deploy to Kubernetes
           command: |
-            #kubectl apply -f kubernetes/2-deployment.yaml
+            kubectl apply -f kubernetes/2-deployment.yaml
+            kubectl get all -n assessment
 
 workflows:
   version: 2
   build_test_deploy:
     jobs:
-      #- test
-      #- build:
-      #    requires:
-      #      - test
-      - deploy
-          #requires:
-           # - test
-            #- build
+      - test
+      - build:
+          requires:
+            - test
+      - deploy:
+          requires:
+            - test
+            - build
