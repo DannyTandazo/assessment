@@ -21,6 +21,9 @@
 		<jib.maven.plugin.version>2.7.1</jib.maven.plugin.version>
 		<jaxb.api.version>2.3.0</jaxb.api.version>
 		<swager.annotations.version>1.6.0</swager.annotations.version>
+		<sonar.projectKey>DannyTandazo_assessment</sonar.projectKey>
+		<sonar.organization>dannytandazo</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 	<dependencies>
 		<dependency>
