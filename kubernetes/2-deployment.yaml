@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: greetings-assessment
+  namespace: assessment
+spec:
+  selector:
+    matchLabels:
+      app: greetings-assessment
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: greetings-assessment
+    spec:
+      containers:
+        - name: cxp
+          imagePullPolicy: Always
+          image: gcr.io/assesment-devops/assesment:18
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 15
+            failureThreshold: 20
+            periodSeconds: 5
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 15
+            failureThreshold: 20
+            periodSeconds: 5
+            timeoutSeconds: 5
