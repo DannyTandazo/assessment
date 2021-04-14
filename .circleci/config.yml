@@ -10,7 +10,11 @@ jobs:
           name: Login to gcr.io
           command: cat src/main/resources/assesment-devops-3fa87521cee3.json | docker login -u _json_key --password-stdin https://gcr.io/assesment-devops
       - run: mvn clean package -DskipTests
-      - run: mvn compile jib:build -Dimage=gcr.io/assesment-devops/assesment:$CIRCLE_BUILD_NUM
+      - run: mvn compile jib:build -Dimage=gcr.io/assesment-devops/assesment:$CIRCLE_SHA1
+      - run: 
+          name: echo CircleSha
+          command: |
+            echo ${CIRCLE_SHA1}
   test:
     docker:
       - image: circleci/openjdk:11.0.1-jdk
@@ -20,6 +24,32 @@ jobs:
       - run: mvn test
       - store_test_results:
           path: target/surefire-reports
+  
+  deploy_to_staging:
+    docker:
+      - image: google/cloud-sdk
+    working_directory: ~/assessment
+    steps:
+      - checkout
+      - run: 
+          name: Setup Google Cloud SDK
+          command: |
+            apt-get install -qq -y gettext
+            echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+            gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
+      - setup_remote_docker
+      - run: 
+          name: Modify current Version Docker Image
+          command: |
+            echo ${CIRCLE_SHA1}
+            sed -i "s/18/${CIRCLE_SHA1}/g" kubernetes/2-deployment.yaml
+      - run: 
+          name: Deploy to Kubernetes
+          command: |
+            kubectl apply -f kubernetes/2-deployment.yaml
 
 workflows:
   version: 2
